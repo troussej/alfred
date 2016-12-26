@@ -6,6 +6,7 @@ import { Light } from './light';
 import { LightsService } from './lights.service';
 
 @Component({
+  moduleId: module.id.replace("/dist/client/", "/"),
   selector: 'lights',
   templateUrl: 'lights.component.html',
   styleUrls: ['lights.component.css']
@@ -29,7 +30,11 @@ export class LightsComponent implements OnInit {
   }
 
   getLights(): void {
-      this.lightService.getLights().then(lights => this.lights = lights);
+      this.lightService.getLights().then(lights => {
+       console.log('lights')
+       console.log(lights)
+        this.lights = lights
+      });
   }
 
   /*  gotoDetail(): void {

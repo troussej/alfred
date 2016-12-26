@@ -4,7 +4,7 @@ const Hueook = require('jtro-hueook');
 const lightRouter = express_1.Router();
 exports.lightRouter = lightRouter;
 const hueook = new Hueook();
-lightRouter.route('light').get((request, response) => {
+lightRouter.route('/light').get((request, response) => {
     hueook.getLights().then(lights => { response.json(lights); });
 });
 lightRouter

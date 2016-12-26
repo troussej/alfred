@@ -8,14 +8,14 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class LightsService {
 
-  private lightsUrl = 'api/hue/light';  // URL to web api
+  private lightsUrl = 'http://localhost:4300/api/hue/light';  // URL to web api
 
   constructor(private http: Http) { }
 
   getLights(): Promise<Light[]> {
     return this.http.get(this.lightsUrl)
       .toPromise()
-      .then(response => response.json().data as Light[])
+      .then(response => response.json() as Light[])
       .catch(this.handleError);
 
   }
@@ -23,7 +23,7 @@ export class LightsService {
     const url = `${this.lightsUrl}/${id}`;
     return this.http.get(url)
       .toPromise()
-      .then(response => response.json().data as Light)
+      .then(response => response.json() as Light)
       .catch(this.handleError);
   }
   private handleError(error: any): Promise<any> {
@@ -35,7 +35,7 @@ export class LightsService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   update(light: Light): Promise<Light> {
-    const url = `${this.lightsUrl}/${light.id}`;
+    const url = `${this.lightsUrl}/${light.attributes.attributes.id}`;
     return this.http
       .put(url, JSON.stringify(light), { headers: this.headers })
       .toPromise()

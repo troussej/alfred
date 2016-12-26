@@ -11,9 +11,8 @@
     "test": "ng test --watch=false",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "build": "ng build --prod --output-path=dist/client && npm run _server:build",
-    "_server:run": "tsc -p ./server && concurrently \"tsc -w -p ./server\" \"nodemon dist/server/bin/www.js\" ",
-    "_server:build": "tsc -p ./server",
+    "build": "ng build --prod --output-path=dist/client",
+    "_server:run": "nodemon server/bin/www.js ",
     "postinstall": "npm run build"
   },
   "author": "Vlado Tešanović",

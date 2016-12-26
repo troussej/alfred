@@ -10,21 +10,21 @@ import { IAppState } from './store/index';
 import { USER_GET } from './store/profile/profile.actions';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
 export class AppComponent {
 
-  observable$: Observable<{}>;
+    observable$: Observable<{}>;
 
-  constructor(http: Http, store: Store<IAppState>) {
-    this.observable$ = http
-      .get('/api/public/simple')
-      .map((response: Response) => response.json());
+    constructor(http: Http, store: Store<IAppState>) {
+        this.observable$ = http
+            .get('/api/public/simple')
+            .map((response: Response) => response.json());
 
-    store.dispatch({
-      type: USER_GET
-    });
-  }
+        store.dispatch({
+            type: USER_GET
+        });
+    }
 }

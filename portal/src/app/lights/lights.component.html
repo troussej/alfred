@@ -1,0 +1,9 @@
+<ul class="lights">
+<li *ngFor="let light of lights" 
+[class.selected]="lights === selectedLight"
+(click)="onSelect(hero)"
+>
+<span>{{light.id}}</span>
+<span>{{light.name}}</span>
+  </li>
+</ul>

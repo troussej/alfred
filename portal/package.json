@@ -22,9 +22,9 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/compiler-cli": "2.2.3",
     "@angular/common": "2.2.3",
     "@angular/compiler": "2.2.3",
+    "@angular/compiler-cli": "2.2.3",
     "@angular/core": "2.2.3",
     "@angular/forms": "2.2.3",
     "@angular/http": "2.2.3",
@@ -52,17 +52,19 @@
     "cors": "^2.8.1",
     "express": "^4.13.4",
     "express-jwt": "^3.3.0",
+    "huejay": "^1.5.0",
     "jsonwebtoken": "^5.7.0",
+    "jtro-hueook": "file:..\\hueook",
     "node-uuid": "^1.4.7",
     "normalize.css": "^5.0.0",
     "path": "^0.12.7",
+    "rm-local-modules": "0.0.1",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",
     "ts-node": "1.2.1",
     "tslint": "3.13.0",
     "typescript": "~2.0.3",
-    "zone.js": "^0.6.23",
-    "jtro-hueook": "..\\hueook"
+    "zone.js": "^0.6.23"
   },
   "devDependencies": {
     "concurrently": "^3.1.0",

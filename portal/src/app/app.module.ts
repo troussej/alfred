@@ -11,28 +11,28 @@ import { store, effects } from './store';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    routing,
-    SharedModule,
-    store,
-    ...effects,
-    FormsModule,
-    StoreDevtoolsModule.instrumentStore({
-      monitor: useLogMonitor({
-        visible: true,
-        position: 'right'
-      })
-    }),
-    StoreLogMonitorModule,
-    HttpModule
-  ],
-  providers: [],
-  bootstrap: [
-    AppComponent
-  ]
+    declarations: [
+        AppComponent
+    ],
+    imports: [
+        BrowserModule,
+        routing,
+        SharedModule,
+        store,
+        ...effects,
+        FormsModule,
+        StoreDevtoolsModule.instrumentStore({
+            monitor: useLogMonitor({
+                visible: true,
+                position: 'right'
+            })
+        }),
+        StoreLogMonitorModule,
+        HttpModule
+    ],
+    providers: [],
+    bootstrap: [
+        AppComponent
+    ]
 })
-export class AppModule {}
+export class AppModule { }

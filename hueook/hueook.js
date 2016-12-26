@@ -4,27 +4,62 @@
 
 let huejay = require('huejay');
 let config = require('./config.json');
+let _ = require('lodash');
 
+/**
+  Simple wrapper around Huejay
+*/
+class Hueook {
 
-class Hueook(){
-
-  constructor(config){
+  constructor() {
     this.config = config;
-    this.client = getClient();
+    this.client = buildClient();
   }
 
   /*
-    Promise
+    Returns a Promise
   */
-  getLights(){
-    return client.lights.getAll();
+  getLights() {
+    return this.client.lights.getAll();
   }
 
+  getLight(id) {
+    return this.client.lights.getById(id);
+  }
 
+  saveLight(id, params) {
+
+    return this.client.lights.getById(id)
+      .then(light => {
+        let newlight = _.extend(light, params);
+        return this.client.lights.save(newlight);
+      });
+  }
+
+  getGroups() {
+    return this.client.groups.getAll();
+  }
+
+  getGroup(id) {
+    return this.client.groups.getById(id);
+  }
+
+  saveGroup(id, params) {
+
+    return this.client.groups.getById(id)
+      .then(group => {
+        let newgroup = _.extend(group, params);
+        return this.client.groups.save(newgroup);
+      });
+  }
+
+  getClient() {
+    return this.client;
+  }
 }
 
 
-function getClient() {
+function buildClient() {
 
   let client = new huejay.Client({
     host: config.ip,
@@ -47,7 +82,6 @@ function discover() {
 }
 
 
-let client = getClient();
 
 function createUser() {
 
@@ -114,7 +148,7 @@ module.exports = Hueook;
 
 /*client.lights.getById(3)
   .then(light => {
-    light.one = false;
+    light.on = false;
     light.brightness = 255;
     light.hue = 32554;
     light.saturation = 254;

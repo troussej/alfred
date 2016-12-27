@@ -32,7 +32,7 @@ export class LightSmallEditorComponent implements OnInit {
     }
 
     updateAndSaveValue(name: string, value: number): void {
-        this.light[name] = value;
+        this.light[name] = +value;//hack to get number
         this.updateColorFromLight();
         this.save();
     }
@@ -55,7 +55,7 @@ export class LightSmallEditorComponent implements OnInit {
     }
 
     private updateColorFromLight(): void {
-        this.color = this.colorService.getRgbHex(this.light);
+        this.color = this.colorService.getStringColor('hsla',this.light);
     }
 
     /*  gotoDetail(): void {

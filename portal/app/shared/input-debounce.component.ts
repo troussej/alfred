@@ -4,10 +4,12 @@ import {Observable} from 'rxjs/Rx';
 
 @Component({
     selector: 'input-debounce',
-    template: '<input [type]="type"   [(ngModel)]="inputValue" >'
+    template: '<input [type]="type" [min]="min" [max]="max"  [(ngModel)]="inputValue" >'
 })
 export class InputDebounceComponent {  
     @Input() delay: number = 300;
+    @Input() min: number = 0;
+    @Input() max: number = 100;
     @Input() type: string = 'text';
     @Output() value: EventEmitter<any> = new EventEmitter();
 

@@ -24,15 +24,12 @@ export class LightsComponent implements OnInit {
     this.getLights();
   }
 
-
   onSelect(light: Light): void {
     this.selectedLight = light;
   }
 
   getLights(): void {
       this.lightService.getLights().then(lights => {
-       console.log('lights')
-       console.log(lights)
         this.lights = lights
       });
   }

@@ -1,9 +1,14 @@
-<ul class="lights">
-<li *ngFor="let light of lights" 
-[class.selected]="lights === selectedLight"
-(click)="onSelect(hero)"
->
-<span>{{light.attributes.attributes.id}}</span>
-<span>{{light.attributes.attributes.name}}</span>
-  </li>
-</ul>
+<div class="row">
+    <div class="col-xl-3">
+        <div class="card">
+            <h3 class="card-header">Lights</h3>
+            <ul class="list-group ">
+                <light-small-editor *ngFor="let light of lights"
+                [selected]="light === selectedLight"
+                (click)="onSelect(light)"  [light]="light"></light-small-editor>
+            </ul>
+        </div>
+    </div>
+    <div class="col-xl-6">
+    </div>
+</div>

@@ -1,9 +1,9 @@
 
 export class Light {
-    attributes: {
-        attributes: {
-            id: string;
-            name: string;
-        }
-    }
+    id: string;
+    name: string;
+    on: boolean;
+    brightness: number;
+    hue:number;
+    saturation:number;
 };

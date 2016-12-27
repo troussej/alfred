@@ -27,11 +27,10 @@ class Hueook {
     return this.client.lights.getById(id);
   }
 
-  saveLight(id, params) {
-
+  saveLight(id, lightstate) {
     return this.client.lights.getById(id)
       .then(light => {
-        let newlight = _.extend(light, params);
+        let newlight = _.extend(light, lightstate);
         return this.client.lights.save(newlight);
       });
   }

@@ -35,11 +35,11 @@ export class LightsService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   update(light: Light): Promise<Light> {
-    const url = `${this.lightsUrl}/${light.attributes.attributes.id}`;
+    const url = `${this.lightsUrl}/${light.id}/state`;
     return this.http
       .put(url, JSON.stringify(light), { headers: this.headers })
       .toPromise()
-      .then(() => light)
+      .then(response => response.json() as Light)
       .catch(this.handleError);
   }
 

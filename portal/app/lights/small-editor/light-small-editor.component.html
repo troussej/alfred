@@ -1,0 +1,35 @@
+<li class="list-group-item" [class.card-outline-primary]="selected===true"  >
+    <form>
+        <div class="row">
+            <div class="col-xl-4">
+                <span>{{light.id}}</span>-<span>{{light.name}}</span>
+            </div>
+            <div class="col-xl-4">
+                <input-debounce
+                    min="1" max="254" type="range"
+                    (value)="updateAndSaveValue('brightness',$event)"
+                    [inputValue]="light.brightness"
+                >
+                </input-debounce>
+            </div>
+            <div class="col-xl-4">
+                <div [(ngModel)]="light.on" ngbRadioGroup  name="on_{{light.id}}"   (ngModelChange)="save($event)">
+                    <label class="btn btn-primary">
+                        <input type="radio" [value]="true"> On
+                    </label>
+                    <label class="btn btn-primary">
+                        <input type="radio" [value]="false"> Off
+                    </label>
+                </div>
+            </div>
+        </div>
+    </form>
+</li>
+<li>
+    <input 
+        [colorPicker]="color" 
+        (colorPickerChange)="colorChange($event)"
+       [style.background]="color"
+       />
+       {{color}}
+</li>

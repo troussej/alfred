@@ -1,9 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Observable}  from 'rxjs/Observable';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/throttleTime';
-import 'rxjs/add/observable/fromEvent';
+import { FormControl } from '@angular/forms';
 
 
 import { Light } from '../light';
@@ -11,42 +7,59 @@ import { LightsService } from '../lights.service';
 import { ColorService } from '../../shared/color.service';
 
 @Component({
-  moduleId: module.id.replace("/dist/client/", "/"),
-  selector: 'light-small-editor',
-  templateUrl: 'light-small-editor.component.html',
+    moduleId: module.id.replace("/dist/client/", "/"),
+    selector: 'light-small-editor',
+    templateUrl: 'light-small-editor.component.html',
 
 
 })
 export class LightSmallEditorComponent implements OnInit {
 
-  @Input() light: Light;
-  @Input() selected: boolean;
+    @Input() light: Light;
+    @Input() selected: boolean;
 
-   private color: string = "#FFFFFF";
+    private color: string = "#FFFFFF";
+    private colorTO: any;
 
-   constructor(private lightService: LightsService, private colorService: ColorService) {
-  }
-  ngOnInit(){
-      this.color = this.colorService.getRgbHex(this.light);
-  }
+    constructor(private lightService: LightsService, private colorService: ColorService) {
+    }
+    ngOnInit() {
+        this.updateColorFromLight();
+    }
 
-  save(): void {
-    this.lightService.update(this.light)//.then(light => this.light = light);
-  }
+    save(): void {
+        this.lightService.update(this.light)//.then(light => this.light = light);
+    }
 
-  updateAndSaveValue(name: string,value:number):void{
-      this.light[name] = value;
-      this.save();
-  }
+    updateAndSaveValue(name: string, value: number): void {
+        this.light[name] = value;
+        this.updateColorFromLight();
+        this.save();
+    }
 
-  colorChange(value:string): void {
-      this.color = value;
-      this.colorService.updateColor(value, this.light);
-      this.save();
-  }
+    updateLightColorAndSave(): void {
+        this.colorService.updateColor(this.color, this.light);
+        this.save();
+    }
 
-  /*  gotoDetail(): void {
-      this.router.navigate(['/detail', this.selectedLight.id]);
-    }*/
+    colorChange(value: string): void {
+        this.color = value;
+        //manual debounce...
+        if (this.colorTO){
+            clearTimeout(this.colorTO);
+        }
+        this.colorTO = setTimeout(()=>{
+            this.updateLightColorAndSave()
+        },
+            100);
+    }
+
+    private updateColorFromLight(): void {
+        this.color = this.colorService.getRgbHex(this.light);
+    }
+
+    /*  gotoDetail(): void {
+        this.router.navigate(['/detail', this.selectedLight.id]);
+      }*/
 
 }
